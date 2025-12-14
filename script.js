@@ -15,7 +15,6 @@ function opentab(index) {
   }
 }
 
-
 document.addEventListener("DOMContentLoaded", () => {
   opentab(0);
 });
@@ -24,79 +23,72 @@ document.addEventListener("DOMContentLoaded", () => {
 
 const faqItems = document.querySelectorAll(".faq-item");
 
-faqItems.forEach(item=>{
+faqItems.forEach(item => {
   const q = item.querySelector(".faq-question");
-  q.addEventListener("click",()=>{
-    faqItems.forEach(i=>{
-      if(i!==item){
-        i.classList.remove("active");
-        i.querySelector(".faq-question").setAttribute("aria-expanded","false");
+
+  q.addEventListener("click", () => {
+    faqItems.forEach(i => {
+      if (i !== item) i.classList.remove("active");
+    });
+
+    item.classList.toggle("active");
+  });
+});
+
+
+
+
+
+  const swiper = new Swiper(".mySwiper", {
+    slidesPerView: 3,
+    spaceBetween: 25,
+    loop: true,
+    autoplay: {
+      delay: 2500,
+      disableOnInteraction: false,
+    },
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+    },
+    breakpoints: {
+      0: { slidesPerView: 1 },
+      768: { slidesPerView: 2 },
+      1024: { slidesPerView: 3 },
+    },
+  });
+
+
+
+const form = document.getElementById("contactForm");
+const popup = document.getElementById("popup");
+
+if (form) {
+  form.addEventListener("submit", function (e) {
+    e.preventDefault(); 
+
+    const formData = new FormData(form);
+
+    fetch("submit.php", {
+      method: "POST",
+      body: formData
+    })
+    .then(res => res.text())
+    .then(data => {
+      if (data.trim() === "success") {
+        popup.style.display = "block";
+
+        setTimeout(() => {
+          popup.style.display = "none";
+        }, 3000);
+
+        form.reset();
       }
     });
-    const open = item.classList.toggle("active");
-    q.setAttribute("aria-expanded",open);
   });
-});
-
-
-
-  $(document).ready(function () {
-
-    $('.facility-slider').slick({
-      slidesToShow: 3,
-      slidesToScroll: 1,
-      arrows: true,
-      prevArrow: $('#prev'),
-      nextArrow: $('#next'),
-      dots: false,
-      infinite: true,
-      speed: 600,
-      responsive: [
-        {
-          breakpoint: 1024,
-          settings: {
-            slidesToShow: 2
-          }
-        },
-        {
-          breakpoint: 768,
-          settings: {
-            slidesToShow: 1
-          }
-        }
-      ]
-    });
-
-  });
-
-
-
-
-const move = 350; 
-
-nextBtn.addEventListener("click", () => {
-  slider.scrollBy({ left: move, behavior: "smooth" });
-});
-
-prevBtn.addEventListener("click", () => {
-  slider.scrollBy({ left: -move, behavior: "smooth" });
-});
-document.querySelector(".contact-form").addEventListener("submit",e=>{
-  e.preventDefault();
-
-  const inputs=e.target.querySelectorAll("input");
-  let valid=true;
-
-  inputs.forEach(i=>{
-    if(!i.value){
-      i.style.border="2px solid red";
-      valid=false;
-    }else{
-      i.style.border="none";
-    }
-  });
-
-  if(valid) alert("Form submitted successfully!");
-});
-
+}
 
