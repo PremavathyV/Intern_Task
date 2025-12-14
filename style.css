@@ -1,7 +1,7 @@
 *{margin:0;padding:0;box-sizing:border-box;font-family:Poppins}
 body{color:#222}
 
-/* NAV */
+
 .nav{position:sticky;top:0;background:#fff;display:flex;
 justify-content:space-between;align-items:center;padding:16px 50px;z-index:10}
 .nav a{margin:0 10px;font-size:14px}
@@ -666,3 +666,4 @@ url("clg.jpg") center/cover}
     font-size: 24px;
   }
 }
+
