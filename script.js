@@ -1,6 +1,4 @@
-/* =========================
-   1️⃣ TABS – Awards Section
-========================= */
+
 function opentab(index) {
   const tabs = document.querySelectorAll(".tab-btn");
   const contents = document.querySelectorAll(".award-content, .tab-content");
@@ -17,15 +15,13 @@ function opentab(index) {
   }
 }
 
-/* Default state */
+
 document.addEventListener("DOMContentLoaded", () => {
   opentab(0);
 });
 
 
-/* =========================
-   2️⃣ FAQ – Accordion
-========================= */
+
 const faqItems = document.querySelectorAll(".faq-item");
 
 faqItems.forEach(item=>{
@@ -76,7 +72,7 @@ faqItems.forEach(item=>{
 
 
 
-const move = 350; // card width + gap
+const move = 350; 
 
 nextBtn.addEventListener("click", () => {
   slider.scrollBy({ left: move, behavior: "smooth" });
@@ -102,4 +98,5 @@ document.querySelector(".contact-form").addEventListener("submit",e=>{
 
   if(valid) alert("Form submitted successfully!");
 });
+
 
